@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐 - 致最爱的妈妈</title>
+    <style>
+        :root {
+            --bg-warm: #fef9f4;
+            --rose: #e8a0b4;
+            --rose-deep: #d4788f;
+            --rose-light: #f7d0da;
+            --gold: #c9a96e;
+            --gold-light: #e0cfa3;
+            --cream: #fffdf8;
+            --text-dark: #4a2c2a;
+            --text-soft: #6b4d4a;
+            --card-shadow: 0 20px 60px rgba(180, 140, 140, 0.25), 0 4px 16px rgba(160, 120, 120, 0.12);
+            --card-shadow-hover: 0 28px 72px rgba(180, 140, 140, 0.35), 0 6px 20px rgba(160, 120, 120, 0.18);
+            --bloom-transition: 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --fade-transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at 50% 35%, #fef5f0 0%, #fdf0ea 20%, #fce8e0 45%, #f9ddd4 65%, #f5d5ce 80%, #eccac5 100%);
+            background-attachment: fixed;
+            font-family: 'Georgia', 'Noto Serif SC', 'STSong', 'Songti SC', 'SimSun', 'KaiTi', '楷体', 'STKaiti', serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+        }
+
+        /* 背景柔光层 */
+        .bg-glow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.45;
+            animation: glowPulse 6s ease-in-out infinite;
+        }
+        .bg-glow.g1 {
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(255, 210, 195, 0.7) 0%, transparent 70%);
+            top: -8%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        .bg-glow.g2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 185, 170, 0.6) 0%, transparent 70%);
+            bottom: -10%;
+            right: -8%;
+            animation-delay: -3s;
+        }
+        .bg-glow.g3 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(245, 200, 185, 0.55) 0%, transparent 70%);
+            top: 50%;
+            left: 55%;
+            animation-delay: -5s;
+            animation-duration: 8s;
+        }
+
+        @keyframes glowPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1.25);
+                opacity: 0.55;
+            }
+            70% {
+                transform: scale(0.9);
+                opacity: 0.35;
+            }
+        }
+
+        /* 花瓣容器 */
+        .petals-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            top: -60px;
+            border-radius: 50% 50% 50% 50% / 35% 35% 65% 65%;
+            pointer-events: none;
+            will-change: transform, opacity;
+            animation: petalFall linear infinite;
+        }
+
+        @keyframes petalFall {
+            0% {
+                transform: translateY(-8vh) translateX(0) rotate(0deg) scale(1);
+                opacity: 0.85;
+            }
+            15% {
+                transform: translateY(12vh) translateX(25px) rotate(65deg) scale(1.08);
+                opacity: 0.9;
+            }
+            30% {
+                transform: translateY(28vh) translateX(-18px) rotate(140deg) scale(0.95);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(48vh) translateX(30px) rotate(220deg) scale(1.02);
+                opacity: 0.7;
+            }
+            65% {
+                transform: translateY(64vh) translateX(-22px) rotate(290deg) scale(0.9);
+                opacity: 0.55;
+            }
+            80% {
+                transform: translateY(80vh) translateX(15px) rotate(350deg) scale(0.78);
+                opacity: 0.35;
+            }
+            95% {
+                transform: translateY(98vh) translateX(-8px) rotate(420deg) scale(0.55);
+                opacity: 0.12;
+            }
+            100% {
+                transform: translateY(110vh) translateX(0) rotate(450deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* 光点粒子 */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            width: 4px;
+            height: 4px;
+            background: rgba(220, 170, 140, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 0 8px 3px rgba(240, 190, 160, 0.5);
+            animation: sparkleFloat ease-in-out infinite;
+        }
+
+        @keyframes sparkleFloat {
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-35px) translateX(10px) scale(1.8);
+                opacity: 0.75;
+            }
+            50% {
+                transform: translateY(-15px) translateX(-10px) scale(0.8);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-45px) translateX(5px) scale(1.4);
+                opacity: 0.6;
+            }
+        }
+
+        /* 主容器 */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            perspective: 1000px;
+        }
+
+        /* 卡片 */
+        .bloom-card {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(160deg,
+                    #fffefc 0%, #fffcf8 15%, #fefaf5 30%, #fffdf9 50%, #fefbf7 65%, #fffefb 85%, #fdf8f2 100%);
+            border-radius: 28px;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: all var(--bloom-transition);
+            overflow: hidden;
+            border: 1.5px solid rgba(210, 170, 150, 0.25);
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bloom-card:hover {
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        /* 卡片顶部装饰纹理 */
+        .bloom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg,
+                    transparent 0%, rgba(200, 155, 120, 0.3) 8%, rgba(210, 160, 130, 0.5) 20%,
+                    rgba(220, 170, 140, 0.6) 35%, rgba(210, 155, 125, 0.55) 50%,
+                    rgba(200, 145, 115, 0.45) 65%, rgba(195, 140, 110, 0.3) 80%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+            border-radius: 28px 28px 0 0;
+        }
+
+        /* 卡片底部装饰 */
+        .bloom-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                    transparent 0%, rgba(190, 140, 110, 0.2) 15%, rgba(200, 150, 120, 0.35) 40%,
+                    rgba(195, 145, 115, 0.3) 60%, rgba(185, 135, 105, 0.2) 80%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+            border-radius: 0 0 28px 28px;
+        }
+
+        /* 花蕾状态（初始） */
+        .bloom-card.bud-state {
+            max-width: 220px;
+            min-height: 220px;
+            border-radius: 50%;
+            box-shadow: 0 16px 48px rgba(190, 140, 130, 0.3), 0 0 0 18px rgba(245, 210, 195, 0.2), 0 0 0 40px rgba(245, 210, 195, 0.1);
+            animation: budGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes budGlow {
+            0%,
+            100% {
+                box-shadow: 0 16px 48px rgba(190, 140, 130, 0.3), 0 0 0 18px rgba(245, 210, 195, 0.2), 0 0 0 40px rgba(245, 210, 195, 0.1);
+            }
+            50% {
+                box-shadow: 0 18px 52px rgba(190, 140, 130, 0.4), 0 0 0 26px rgba(245, 210, 195, 0.28), 0 0 0 52px rgba(245, 210, 195, 0.15);
+            }
+        }
+
+        /* 封面层 */
+        .card-cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 30px;
+            transition: opacity var(--fade-transition), transform var(--fade-transition);
+            z-index: 2;
+            position: relative;
+        }
+
+        .card-cover.fade-out {
+            opacity: 0;
+            transform: scale(0.85);
+            pointer-events: none;
+        }
+
+        .cover-flower {
+            font-size: 56px;
+            animation: flowerSway 3s ease-in-out infinite;
+            filter: drop-shadow(0 8px 20px rgba(200, 140, 130, 0.35));
+            line-height: 1;
+        }
+
+        @keyframes flowerSway {
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+            30% {
+                transform: rotate(5deg) scale(1.08);
+            }
+            60% {
+                transform: rotate(-4deg) scale(0.95);
+            }
+            85% {
+                transform: rotate(2deg) scale(1.03);
+            }
+        }
+
+        .cover-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            letter-spacing: 0.08em;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cover-subtitle {
+            font-size: 0.9rem;
+            color: var(--rose-deep);
+            letter-spacing: 0.1em;
+            animation: breatheText 2.2s ease-in-out infinite;
+            text-align: center;
+        }
+
+        @keyframes breatheText {
+            0%,
+            100% {
+                opacity: 0.55;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.06);
+            }
+        }
+
+        .cover-hint-ring {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid rgba(200, 150, 130, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: hintPulse 2s ease-in-out infinite;
+            margin-top: 4px;
+        }
+        .cover-hint-ring .arrow {
+            font-size: 20px;
+            color: var(--rose);
+            animation: hintArrow 2s ease-in-out infinite;
+        }
+
+        @keyframes hintPulse {
+            0%,
+            100% {
+                border-color: rgba(200, 150, 130, 0.4);
+                box-shadow: 0 0 0 0 rgba(210, 160, 140, 0.3);
+            }
+            50% {
+                border-color: rgba(200, 150, 130, 0.75);
+                box-shadow: 0 0 0 14px rgba(210, 160, 140, 0);
+            }
+        }
+        @keyframes hintArrow {
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(5px);
+                opacity: 1;
+            }
+        }
+
+        /* 祝福内容层 */
+        .card-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 32px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+            transform: translateY(12px);
+            z-index: 1;
+            gap: 18px;
+        }
+
+        .card-content.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .card-content .decor-top {
+            font-size: 38px;
+            opacity: 0.7;
+            line-height: 1;
+            animation: flowerSway 4s ease-in-out infinite;
+        }
+
+        .card-content .blessing-line {
+            font-size: 1.05rem;
+            color: var(--text-soft);
+            text-align: center;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            max-width: 90%;
+        }
+        .card-content .blessing-line.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-content .divider {
+            width: 60px;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, rgba(200, 150, 120, 0.55), transparent);
+            border-radius: 1px;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin: 6px 0;
+        }
+        .card-content .divider.revealed {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .card-content .signature {
+            font-family: 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', 'KaiTi', '楷体', 'STKaiti', cursive;
+            font-size: 1.35rem;
+            color: var(--text-dark);
+            letter-spacing: 0.06em;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 6px;
+            text-align: center;
+        }
+        .card-content .signature.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 底部小花装饰 */
+        .card-content .decor-bottom {
+            display: flex;
+            gap: 10px;
+            font-size: 22px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.7s ease 0.6s;
+            letter-spacing: 4px;
+        }
+        .card-content .decor-bottom.revealed {
+            opacity: 0.65;
+            transform: translateY(0);
+        }
+
+        /* 响应式 */
+        @media (max-width: 500px) {
+            .bloom-card {
+                max-width: 92vw;
+                border-radius: 24px;
+                min-height: 340px;
+            }
+            .bloom-card.bud-state {
+                max-width: 170px;
+                min-height: 170px;
+                border-radius: 50%;
+            }
+            .bloom-card.bud-state .card-cover {
+                padding: 22px;
+                gap: 10px;
+            }
+            .bloom-card.bud-state .cover-flower {
+                font-size: 42px;
+            }
+            .bloom-card.bud-state .cover-title {
+                font-size: 1.15rem;
+            }
+            .bloom-card.bud-state .cover-subtitle {
+                font-size: 0.78rem;
+            }
+            .card-content {
+                padding: 30px 22px;
+                gap: 14px;
+            }
+            .card-content .blessing-line {
+                font-size: 0.95rem;
+                letter-spacing: 0.03em;
+            }
+            .card-content .signature {
+                font-size: 1.2rem;
+            }
+            .card-content .decor-top {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .bloom-card.bud-state {
+                max-width: 150px;
+                min-height: 150px;
+            }
+            .bloom-card.bud-state .cover-flower {
+                font-size: 36px;
+            }
+            .bloom-card.bud-state .cover-title {
+                font-size: 1rem;
+            }
+            .card-content {
+                padding: 24px 16px;
+                gap: 10px;
+            }
+            .card-content .blessing-line {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景柔光 -->
+    <div class="bg-glow g1"></div>
+    <div class="bg-glow g2"></div>
+    <div class="bg-glow g3"></div>
+
+    <!-- 花瓣飘落层 -->
+    <div class="petals-layer" id="petalsLayer" aria-hidden="true"></div>
+
+    <!-- 光点粒子层 -->
+    <div id="sparklesLayer" aria-hidden="true"></div>
+
+    <!-- 主容器 -->
+    <div class="main-container">
+        <div class="bloom-card bud-state" id="bloomCard" role="button" aria-label="点击开启母亲节祝福">
+            <!-- 封面 -->
+            <div class="card-cover" id="cardCover">
+                <span class="cover-flower" aria-hidden="true">🌷</span>
+                <div class="cover-title">致我最爱的妈妈</div>
+                <div class="cover-subtitle">母亲节快乐</div>
+                <div class="cover-hint-ring">
+                    <span class="arrow">✧</span>
+                </div>
+            </div>
+
+            <!-- 祝福内容 -->
+            <div class="card-content" id="cardContent">
+                <span class="decor-top" aria-hidden="true">🌸</span>
+                <p class="blessing-line" data-delay="0">感谢您多年来的养育之恩</p>
+                <p class="blessing-line" data-delay="1">您的爱如春风般温暖我的心田</p>
+                <p class="blessing-line" data-delay="2">岁月在您脸上留下痕迹</p>
+                <p class="blessing-line" data-delay="3">却从未减少您眼中对我的关怀</p>
+                <div class="divider" data-delay="4"></div>
+                <p class="blessing-line" data-delay="5">愿您身体健康，笑口常开</p>
+                <p class="blessing-line" data-delay="6">愿时光温柔，待您如初</p>
+                <p class="blessing-line" data-delay="7">母亲节快乐，我永远爱您</p>
+                <div class="divider" data-delay="8"></div>
+                <p class="signature" data-delay="9">—— 你的儿子</p>
+                <span class="decor-bottom" data-delay="10" aria-hidden="true">💗 🌺 💗</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ========== 创建飘落花瓣 ==========
+            const petalsLayer = document.getElementById('petalsLayer');
+            const petalColors = [
+                '#f4b8c1', '#f2aeb9', '#f7c5cd', '#e89fad', '#f9d0d8',
+                '#f0b5bf', '#fcd5dd', '#eaa3b2', '#f6bec8', '#fddce3',
+                '#f3b6c2', '#f8c9d2', '#eab0bb', '#f5c0ca', '#fce0e6',
+                '#f1b0bc', '#f7c3ce', '#fde4e9', '#e9a6b5', '#f4bac6'
+            ];
+
+            const petalCount = 38;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+
+                const sizeW = Math.random() * 18 + 14;
+                const sizeH = Math.random() * 22 + 16;
+                const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+                const leftPos = Math.random() * 100;
+                const duration = Math.random() * 10 + 9;
+                const delay = Math.random() * 14;
+                const opacityStart = Math.random() * 0.4 + 0.6;
+                const rotationStart = Math.random() * 360;
+
+                petal.style.cssText = `
+                    width: ${sizeW}px;
+                    height: ${sizeH}px;
+                    background: ${color};
+                    left: ${leftPos}%;
+                    animation-duration: ${duration}s;
+                    animation-delay: ${delay}s;
+                    opacity: ${opacityStart};
+                    transform: rotate(${rotationStart}deg);
+                    filter: blur(${Math.random() * 0.6}px);
+                `;
+
+                petalsLayer.appendChild(petal);
+            }
+
+            // ========== 创建光点粒子 ==========
+            const sparklesLayer = document.getElementById('sparklesLayer');
+            const sparkleCount = 18;
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                const size = Math.random() * 4 + 2.5;
+                const leftPos = Math.random() * 92 + 4;
+                const topPos = Math.random() * 88 + 6;
+                const duration = Math.random() * 6 + 5;
+                const delay = Math.random() * 7;
+
+                sparkle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${leftPos}%;
+                    top: ${topPos}%;
+                    animation-duration: ${duration}s;
+                    animation-delay: ${delay}s;
+                `;
+
+                sparklesLayer.appendChild(sparkle);
+            }
+
+            // ========== 卡片交互逻辑 ==========
+            const bloomCard = document.getElementById('bloomCard');
+            const cardCover = document.getElementById('cardCover');
+            const cardContent = document.getElementById('cardContent');
+            const blessingLines = cardContent.querySelectorAll('.blessing-line');
+            const dividers = cardContent.querySelectorAll('.divider');
+            const signature = cardContent.querySelector('.signature');
+            const decorBottom = cardContent.querySelector('.decor-bottom');
+            const decorTop = cardContent.querySelector('.decor-top');
+
+            let hasBloomed = false;
+            let revealTimeoutIds = [];
+
+            function revealContent() {
+                if (hasBloomed) return;
+                hasBloomed = true;
+
+                // 卡片从花蕾展开
+                bloomCard.classList.remove('bud-state');
+                bloomCard.style.minHeight = 'auto';
+
+                // 隐藏封面
+                cardCover.classList.add('fade-out');
+
+                // 短暂延迟后显示内容
+                setTimeout(() => {
+                    cardContent.classList.add('visible');
+
+                    // 逐句显示祝福
+                    const allRevealItems = [
+                        ...blessingLines,
+                        ...dividers,
+                        signature,
+                        decorBottom,
+                    ];
+
+                    // 确保decorTop也可见（它本身在cardContent中）
+                    if (decorTop) {
+                        decorTop.style.opacity = '0.7';
+                    }
+
+                    allRevealItems.forEach((item) => {
+                        const delay = parseInt(item.getAttribute('data-delay')) || 0;
+                        const timeoutId = setTimeout(() => {
+                            item.classList.add('revealed');
+                        }, delay * 550 + 350);
+                        revealTimeoutIds.push(timeoutId);
+                    });
+
+                    // 最后给decor-bottom添加revealed
+                    if (decorBottom) {
+                        const dbDelay = parseInt(decorBottom.getAttribute('data-delay')) || 10;
+                        const tid = setTimeout(() => {
+                            decorBottom.classList.add('revealed');
+                        }, dbDelay * 550 + 350);
+                        revealTimeoutIds.push(tid);
+                    }
+                }, 350);
+            }
+
+            // 点击卡片触发
+            bloomCard.addEventListener('click', function(e) {
+                if (!hasBloomed) {
+                    revealContent();
+                }
+            });
+
+            // 键盘可访问性
+            bloomCard.addEventListener('keydown', function(e) {
+                if ((e.key === 'Enter' || e.key === ' ') && !hasBloomed) {
+                    e.preventDefault();
+                    revealContent();
+                }
+            });
+
+            // 移动端触摸优化
+            bloomCard.addEventListener('touchend', function(e) {
+                if (!hasBloomed) {
+                    e.preventDefault();
+                    revealContent();
+                }
+            });
+
+            // ========== 页面加载后轻微提示动画 ==========
+            // 封面提示环已经有呼吸动画，这里额外加一个微妙的卡片悬浮
+            setTimeout(() => {
+                if (!hasBloomed) {
+                    bloomCard.style.transform = 'translateY(-6px)';
+                    setTimeout(() => {
+                        bloomCard.style.transform = 'translateY(0px)';
+                    }, 800);
+                }
+            }, 2000);
+
+            // 周期性微动（仅在未展开时）
+            setInterval(() => {
+                if (!hasBloomed) {
+                    bloomCard.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        bloomCard.style.transform = 'translateY(0px)';
+                    }, 700);
+                }
+            }, 4000);
+
+            console.log('💐 母亲节快乐！点击卡片开启祝福 🌸');
+        })();
+    </script>
+</body>
+</html>
